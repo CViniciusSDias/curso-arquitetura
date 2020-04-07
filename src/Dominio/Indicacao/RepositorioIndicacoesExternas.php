@@ -2,7 +2,7 @@
 
 namespace Alura\Arquitetura\Dominio\Indicacao;
 
-interface RepositorioExternoIndicacao
+interface RepositorioIndicacoesExternas
 {
     /** @return Indicacao[] */
     public function todas(): array;

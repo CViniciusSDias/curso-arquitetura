@@ -6,9 +6,9 @@ use Alura\Arquitetura\Dominio\Aluno\Aluno;
 use Alura\Arquitetura\Dominio\CPF;
 use Alura\Arquitetura\Dominio\Email;
 use Alura\Arquitetura\Dominio\Indicacao\Indicacao;
-use Alura\Arquitetura\Dominio\Indicacao\RepositorioExternoIndicacao;
+use Alura\Arquitetura\Dominio\Indicacao\RepositorioIndicacoesExternas;
 
-class RepositorioExternoIndicacaoArquivo implements RepositorioExternoIndicacao
+class RepositorioIndicacoesExternasArquivo implements RepositorioIndicacoesExternas
 {
     private string $caminhoArquivo;
 
