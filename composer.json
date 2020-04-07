@@ -1,0 +1,12 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Alura\\Arquitetura\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">7.4",
+        "ext-pdo": "*",
+        "ext-json": "*"
+    }
+}
