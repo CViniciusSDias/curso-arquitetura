@@ -10,6 +10,11 @@ class RepositorioIndicacaoPdo implements RepositorioIndicacao
 {
     private PDO $pdo;
 
+    public function __construct(PDO $pdo)
+    {
+        $this->pdo = $pdo;
+    }
+
     public function adicionar(Indicacao $indicacao): void
     {
         $sql = 'INSERT INTO indicacoes (cpf_indicante, cpf_indicado, data_indicacao) VALUES (:indicante, :indicado, :data);';

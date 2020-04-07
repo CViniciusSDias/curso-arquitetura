@@ -1,6 +1,6 @@
 <?php
 
-namespace Alura\Arquitetura\Aplicacao\Aluno;
+namespace Alura\Arquitetura\Aplicacao\Aluno\CadastrarAluno;
 
 use Alura\Arquitetura\Dominio\Aluno\CriptografadorDeSenha;
 use Alura\Arquitetura\Dominio\Aluno\FabricaAluno;

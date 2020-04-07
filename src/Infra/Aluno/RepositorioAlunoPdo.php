@@ -40,7 +40,7 @@ class RepositorioAlunoPdo implements RepositorioAluno
 
     public function buscaPorCpf(CPF $cpf): Aluno
     {
-        $sql = 'SELECT cpf, nome, email, ddd, numero as numero_telefone FROM alunos JOIN telefones ON telefones.cpf_aluno = aluno.cpf WHERE cpf = ?;';
+        $sql = 'SELECT cpf, nome, email, ddd, numero as numero_telefone FROM alunos JOIN telefones ON telefones.cpf_aluno = alunos.cpf WHERE cpf = ?;';
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, (string) $cpf);
 
@@ -76,5 +76,15 @@ class RepositorioAlunoPdo implements RepositorioAluno
 
         $dadosAluno = $stmt->fetch(PDO::FETCH_ASSOC);
         return $this->buscaPorCpf($dadosAluno['cpf']);
+    }
+
+    public function adicionaTelefoneAoAluno(Aluno $aluno, Telefone $telefone)
+    {
+        $stmt = $this->pdo->prepare('INSERT INTO telefones (ddd, numero, cpf_aluno) VALUES (:ddd, :numero, :cpf_aluno);');
+        $stmt->bindValue('ddd', $telefone->ddd());
+        $stmt->bindValue('numero', $telefone->numero());
+        $stmt->bindValue('cpf_aluno', (string) $aluno->cpf());
+
+        $stmt->execute();
     }
 }

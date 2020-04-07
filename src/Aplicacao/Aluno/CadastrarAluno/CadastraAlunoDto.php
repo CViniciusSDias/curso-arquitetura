@@ -1,6 +1,6 @@
 <?php
 
-namespace Alura\Arquitetura\Aplicacao\Aluno;
+namespace Alura\Arquitetura\Aplicacao\Aluno\CadastrarAluno;
 
 class CadastraAlunoDto
 {

@@ -28,7 +28,7 @@ class Telefone
             throw new \InvalidArgumentException('Número de telefone inválido');
         }
 
-        $this->numero;
+        $this->numero = $numero;
     }
 
     public function __toString(): string

@@ -2,8 +2,7 @@
 
 require_once 'vendor/autoload.php';
 
-use Alura\Arquitetura\Aplicacao\Aluno\CadastraAluno;
-use Alura\Arquitetura\Aplicacao\Aluno\CadastraAlunoDto;
+use Alura\Arquitetura\Aplicacao\Aluno\CadastrarAluno\{CadastraAluno, CadastraAlunoDto};
 use Alura\Arquitetura\Infra\Aluno\{CriptografadorDeSenhaMd5, CriptografadorDeSenhaPadrao, CriptografadorDeSenhaArgon2};
 use Alura\Arquitetura\Infra\Aluno\RepositorioAlunoPdo;
 
