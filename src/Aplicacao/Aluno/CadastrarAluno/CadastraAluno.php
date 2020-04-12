@@ -23,7 +23,6 @@ class CadastraAluno
             ->comCpfNomeEmail($dados->numeroCpfAluno, $dados->nomeAluno, $dados->enderecoEmailAluno)
             ->comSenha($this->criptografadorDeSenha->criptografarSenha($dados->senhaEmTextoAluno))
             ->constroi();
-        var_dump($aluno->senha());
 
         $this->repositorioAluno->adiciona($aluno);
     }

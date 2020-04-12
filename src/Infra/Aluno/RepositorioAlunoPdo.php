@@ -3,6 +3,7 @@
 namespace Alura\Arquitetura\Infra\Aluno;
 
 use Alura\Arquitetura\Dominio\Aluno\Aluno;
+use Alura\Arquitetura\Dominio\Aluno\AlunoNaoEncontrado;
 use Alura\Arquitetura\Dominio\Aluno\RepositorioAluno;
 use Alura\Arquitetura\Dominio\Aluno\Telefone;
 use Alura\Arquitetura\Dominio\CPF;
@@ -40,11 +41,16 @@ class RepositorioAlunoPdo implements RepositorioAluno
 
     public function buscaPorCpf(CPF $cpf): Aluno
     {
-        $sql = 'SELECT cpf, nome, email, ddd, numero as numero_telefone FROM alunos JOIN telefones ON telefones.cpf_aluno = alunos.cpf WHERE cpf = ?;';
+        $sql = 'SELECT cpf, nome, email, ddd, numero as numero_telefone FROM alunos LEFT JOIN telefones ON telefones.cpf_aluno = alunos.cpf WHERE alunos.cpf = ?;';
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, (string) $cpf);
+        $stmt->execute();
 
         $dadosAluno = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (count($dadosAluno) === 0) {
+            throw new AlunoNaoEncontrado($cpf);
+        }
+
         return $this->mapeiaAluno($dadosAluno);
     }
 
@@ -56,7 +62,8 @@ class RepositorioAlunoPdo implements RepositorioAluno
 
         $primeiraLinha = $dadosAluno[0];
         $aluno = new Aluno(new CPF($primeiraLinha['cpf']), $primeiraLinha['nome'], new Email($primeiraLinha['email']));
-        foreach ($dadosAluno as $linha) {
+        $telefones = array_filter($dadosAluno, fn ($linha) => $linha['ddd'] !== null && $linha['numero_telefone'] !== null);
+        foreach ($telefones as $linha) {
             $aluno->addTelefone($linha['ddd'], $linha['numero_telefone']);
         }
 
