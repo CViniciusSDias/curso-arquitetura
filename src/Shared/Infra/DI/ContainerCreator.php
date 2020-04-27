@@ -5,8 +5,10 @@ namespace Alura\Arquitetura\Shared\Infra\DI;
 use Alura\Arquitetura\Academico\Dominio\Aluno\AlunoMatriculado;
 use Alura\Arquitetura\Academico\Dominio\Aluno\CriptografadorDeSenha;
 use Alura\Arquitetura\Academico\Dominio\Aluno\RepositorioAluno;
+use Alura\Arquitetura\Academico\Dominio\Indicacao\EnviadorEmailIndicacao;
 use Alura\Arquitetura\Academico\Infra\Aluno\CriptografadorDeSenhaArgon2;
 use Alura\Arquitetura\Academico\Infra\Aluno\RepositorioAlunoPdo;
+use Alura\Arquitetura\Academico\Infra\Indicacao\EnviadorEmailIndicacaoMail;
 use Alura\Arquitetura\Shared\Dominio\Evento\EmitidorEvento;
 use Alura\Arquitetura\Shared\Infra\Evento\LeagueEvent\EmitidorEvento as LeagueEventEmitidorEvento;
 use Alura\Arquitetura\Shared\Infra\Evento\LeagueEvent\Evento as LeagueEventEvento;
@@ -33,6 +35,7 @@ final class ContainerCreator
             RepositorioAluno::class => autowire(RepositorioAlunoPdo::class),
             EmitidorEvento::class => autowire(LeagueEventEmitidorEvento::class),
             CriptografadorDeSenha::class => autowire(CriptografadorDeSenhaArgon2::class),
+            EnviadorEmailIndicacao::class => autowire(EnviadorEmailIndicacaoMail::class),
             PDO::class => factory(function () {
                 $pdo = new PDO('sqlite::memory:');
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
