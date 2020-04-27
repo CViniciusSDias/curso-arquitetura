@@ -13,7 +13,8 @@
         "php": ">7.4",
         "ext-pdo": "*",
         "ext-json": "*",
-        "league/event": "^2.2"
+        "league/event": "^2.2",
+        "php-di/php-di": "^6.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.1"
