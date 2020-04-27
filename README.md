@@ -12,6 +12,3 @@ temos estruturas bem semelhantes.
 A pasta `Apresentacao` irá conter o ponto de entrada no sistema, que falará com os casos de uso contidos na pasta
 `Aplicacao`, que orquestram chamadas ao `Dominio`, que fornece todas as interfaces que podem ou não precisar de
 `Infra`.
-
-PS.: O conteúdo da pasta `Apresentacao` deve ser ignorado por enquanto, visto que possui apenas alguns arquivos de
-rascunho
