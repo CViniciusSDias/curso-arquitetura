@@ -21,7 +21,12 @@ class Aluno
         $this->telefones = [];
     }
 
-    public function cpf(): string
+    public function numeroCpf(): string
+    {
+        return $this->cpf;
+    }
+
+    public function cpf(): CPF
     {
         return $this->cpf;
     }

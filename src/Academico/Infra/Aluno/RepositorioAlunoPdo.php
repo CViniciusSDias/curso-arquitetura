@@ -23,7 +23,7 @@ class RepositorioAlunoPdo implements RepositorioAluno
     {
         $sql = 'INSERT INTO alunos (cpf, nome, email) VALUES (:cpf, :nome, :email);';
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue('cpf', $aluno->cpf());
+        $stmt->bindValue('cpf', $aluno->numeroCpf());
         $stmt->bindValue('nome', $aluno->nome());
         $stmt->bindValue('email', $aluno->email());
         $stmt->execute();
@@ -90,7 +90,7 @@ class RepositorioAlunoPdo implements RepositorioAluno
         $stmt = $this->pdo->prepare('INSERT INTO telefones (ddd, numero, cpf_aluno) VALUES (:ddd, :numero, :cpf_aluno);');
         $stmt->bindValue('ddd', $telefone->ddd());
         $stmt->bindValue('numero', $telefone->numero());
-        $stmt->bindValue('cpf_aluno', (string) $aluno->cpf());
+        $stmt->bindValue('cpf_aluno', (string) $aluno->numeroCpf());
 
         $stmt->execute();
     }

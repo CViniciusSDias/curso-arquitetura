@@ -22,7 +22,7 @@ class RepositorioAlunoEmMemoria implements RepositorioAluno
      */
     public function buscaPorCpf(CPF $cpf): Aluno
     {
-        $aluno = array_values(array_filter($this->alunos, fn (Aluno $aluno) => $aluno->cpf() == $cpf));
+        $aluno = array_values(array_filter($this->alunos, fn (Aluno $aluno) => $aluno->numeroCpf() == $cpf));
         if (count($aluno) === 0) {
             throw new AlunoNaoEncontrado($cpf);
         }

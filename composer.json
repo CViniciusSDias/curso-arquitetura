@@ -12,7 +12,8 @@
     "require": {
         "php": ">7.4",
         "ext-pdo": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "league/event": "^2.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.1"

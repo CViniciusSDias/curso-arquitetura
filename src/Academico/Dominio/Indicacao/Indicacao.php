@@ -34,11 +34,11 @@ class Indicacao
 
     public function cpfIndicante(): string
     {
-        return $this->indicante->cpf();
+        return $this->indicante->numeroCpf();
     }
 
     public function cpfIndicado(): string
     {
-        return $this->indicado->cpf();
+        return $this->indicado->numeroCpf();
     }
 }

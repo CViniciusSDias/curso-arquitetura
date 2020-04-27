@@ -1,8 +1,8 @@
 <?php
 
-namespace Alura\Arquitetura\Academico\Aplicacao\Aluno\CadastrarAluno;
+namespace Alura\Arquitetura\Academico\Aplicacao\Aluno\MatricularAluno;
 
-class CadastraAlunoDto
+class MatriculaAlunoDto
 {
     public string $numeroCpfAluno;
     public string $nomeAluno;

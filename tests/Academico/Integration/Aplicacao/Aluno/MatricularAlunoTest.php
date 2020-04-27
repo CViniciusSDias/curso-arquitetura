@@ -2,8 +2,8 @@
 
 namespace Alura\Arquitetura\Tests\Academico\Integration\Aplicacao\Aluno;
 
-use Alura\Arquitetura\Academico\Aplicacao\Aluno\CadastrarAluno\CadastraAluno;
-use Alura\Arquitetura\Academico\Aplicacao\Aluno\CadastrarAluno\CadastraAlunoDto;
+use Alura\Arquitetura\Academico\Aplicacao\Aluno\MatricularAluno\MatriculaAluno;
+use Alura\Arquitetura\Academico\Aplicacao\Aluno\MatricularAluno\MatriculaAlunoDto;
 use Alura\Arquitetura\Academico\Dominio\Aluno\CriptografadorDeSenha;
 use Alura\Arquitetura\Academico\Dominio\CPF;
 use Alura\Arquitetura\Academico\Infra\Aluno\CriptografadorDeSenhaArgon2;
@@ -12,7 +12,7 @@ use Alura\Arquitetura\Academico\Infra\Aluno\CriptografadorDeSenhaPadrao;
 use Alura\Arquitetura\Academico\Infra\Aluno\RepositorioAlunoEmMemoria;
 use PHPUnit\Framework\TestCase;
 
-class CadastrarAlunoTest extends TestCase
+class MatricularAlunoTest extends TestCase
 {
     /**
      * @dataProvider criptografadores
@@ -20,7 +20,7 @@ class CadastrarAlunoTest extends TestCase
     public function testAoCadastrarAlunoSenhaDeveSerCifrada(CriptografadorDeSenha $criptografadorSenha)
     {
         $numeroCpfAluno = '123.456.789-10';
-        $dados = new CadastraAlunoDto(
+        $dados = new MatriculaAlunoDto(
             $numeroCpfAluno,
             'Vinicius Dias',
             'email@example.com',
@@ -28,7 +28,7 @@ class CadastrarAlunoTest extends TestCase
         );
 
         $repositorioAluno = new RepositorioAlunoEmMemoria();
-        $cadastrarAluno = new CadastraAluno($repositorioAluno, $criptografadorSenha);
+        $cadastrarAluno = new MatriculaAluno($repositorioAluno, $criptografadorSenha);
         $cadastrarAluno->cadastra($dados);
 
         $aluno = $repositorioAluno->buscaPorCpf(new CPF($numeroCpfAluno));
