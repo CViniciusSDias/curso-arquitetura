@@ -4,13 +4,13 @@ namespace Alura\Arquitetura\Shared\Dominio\Evento;
 
 abstract class OuvinteEvento
 {
-    public function processa(EventoDominio $evento)
+    public function processa(Evento $evento)
     {
         if ($this->sabeProcessar($evento)) {
             $this->reageAo($evento);
         }
     }
 
-    abstract public function sabeProcessar(EventoDominio $evento): bool;
-    abstract public function reageAo(EventoDominio $evento): void;
+    abstract public function sabeProcessar(Evento $evento): bool;
+    abstract public function reageAo(Evento $evento): void;
 }

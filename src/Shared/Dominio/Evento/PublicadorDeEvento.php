@@ -12,7 +12,7 @@ class PublicadorDeEvento
         $this->processadoresEvento[] = $processadorEvento;
     }
 
-    public function publica(EventoDominio $evento)
+    public function publica(Evento $evento)
     {
         foreach ($this->processadoresEvento as $processadorEvento) {
             $processadorEvento->processa($evento);

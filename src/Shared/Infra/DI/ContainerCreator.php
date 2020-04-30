@@ -10,7 +10,7 @@ use Alura\Arquitetura\Academico\Dominio\Indicacao\EnviadorEmailIndicacao;
 use Alura\Arquitetura\Academico\Infra\Aluno\CriptografadorDeSenhaArgon2;
 use Alura\Arquitetura\Academico\Infra\Aluno\RepositorioAlunoPdo;
 use Alura\Arquitetura\Academico\Infra\Indicacao\EnviadorEmailIndicacaoMail;
-use Alura\Arquitetura\Shared\Dominio\Evento\EventoDominio;
+use Alura\Arquitetura\Shared\Dominio\Evento\Evento;
 use Alura\Arquitetura\Shared\Dominio\Evento\OuvinteEvento;
 use Alura\Arquitetura\Shared\Dominio\Evento\PublicadorDeEvento;
 use DI\ContainerBuilder;

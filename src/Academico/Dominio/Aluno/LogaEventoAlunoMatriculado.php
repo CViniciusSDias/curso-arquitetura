@@ -2,17 +2,17 @@
 
 namespace Alura\Arquitetura\Academico\Dominio\Aluno;
 
-use Alura\Arquitetura\Shared\Dominio\Evento\EventoDominio;
+use Alura\Arquitetura\Shared\Dominio\Evento\Evento;
 use Alura\Arquitetura\Shared\Dominio\Evento\OuvinteEvento;
 
 class LogaEventoAlunoMatriculado extends OuvinteEvento
 {
-    public function sabeProcessar(EventoDominio $evento): bool
+    public function sabeProcessar(Evento $evento): bool
     {
-        return $evento instanceof AlunoMatriculado;
+        return $evento->nome() === AlunoMatriculado::class;
     }
 
-    public function reageAo(EventoDominio $evento): void
+    public function reageAo(Evento $evento): void
     {
         /** @var AlunoMatriculado $eventoAlunoMatriculado */
         $eventoAlunoMatriculado = $evento;
