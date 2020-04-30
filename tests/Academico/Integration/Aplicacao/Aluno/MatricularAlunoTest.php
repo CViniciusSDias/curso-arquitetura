@@ -10,6 +10,7 @@ use Alura\Arquitetura\Academico\Infra\Aluno\CriptografadorDeSenhaArgon2;
 use Alura\Arquitetura\Academico\Infra\Aluno\CriptografadorDeSenhaMd5;
 use Alura\Arquitetura\Academico\Infra\Aluno\CriptografadorDeSenhaPadrao;
 use Alura\Arquitetura\Academico\Infra\Aluno\RepositorioAlunoEmMemoria;
+use Alura\Arquitetura\Shared\Dominio\Evento\PublicadorDeEvento;
 use PHPUnit\Framework\TestCase;
 
 class MatricularAlunoTest extends TestCase
@@ -28,7 +29,7 @@ class MatricularAlunoTest extends TestCase
         );
 
         $repositorioAluno = new RepositorioAlunoEmMemoria();
-        $cadastrarAluno = new MatriculaAluno($repositorioAluno, $criptografadorSenha);
+        $cadastrarAluno = new MatriculaAluno($repositorioAluno, $criptografadorSenha, new PublicadorDeEvento());
         $cadastrarAluno->cadastra($dados);
 
         $aluno = $repositorioAluno->buscaPorCpf(new CPF($numeroCpfAluno));

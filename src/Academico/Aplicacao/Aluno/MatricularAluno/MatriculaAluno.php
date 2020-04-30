@@ -7,21 +7,22 @@ use Alura\Arquitetura\Academico\Dominio\Aluno\CriptografadorDeSenha;
 use Alura\Arquitetura\Academico\Dominio\Aluno\FabricaAluno;
 use Alura\Arquitetura\Academico\Dominio\Aluno\RepositorioAluno;
 use Alura\Arquitetura\Shared\Dominio\Evento\EmitidorEvento;
+use Alura\Arquitetura\Shared\Dominio\Evento\PublicadorDeEvento;
 
 class MatriculaAluno
 {
     private RepositorioAluno $repositorioAluno;
     private CriptografadorDeSenha $criptografadorDeSenha;
-    private EmitidorEvento $emitidorEvento;
+    private PublicadorDeEvento $publicadorDeEvento;
 
     public function __construct(
         RepositorioAluno $repositorioAluno,
         CriptografadorDeSenha $criptografadorDeSenha,
-        EmitidorEvento $emitidorEvento
+        PublicadorDeEvento $publicadorDeEvento
     ) {
         $this->repositorioAluno = $repositorioAluno;
         $this->criptografadorDeSenha = $criptografadorDeSenha;
-        $this->emitidorEvento = $emitidorEvento;
+        $this->publicadorDeEvento = $publicadorDeEvento;
     }
 
     public function cadastra(MatriculaAlunoDto $dados): void
@@ -33,6 +34,6 @@ class MatriculaAluno
 
         $this->repositorioAluno->adiciona($aluno);
 
-        $this->emitidorEvento->dipatch(new AlunoMatriculado($aluno->cpf()));
+        $this->publicadorDeEvento->publica(new AlunoMatriculado($aluno->cpf()));
     }
 }

@@ -4,16 +4,16 @@ namespace Alura\Arquitetura\Shared\Infra\DI;
 
 use Alura\Arquitetura\Academico\Dominio\Aluno\AlunoMatriculado;
 use Alura\Arquitetura\Academico\Dominio\Aluno\CriptografadorDeSenha;
+use Alura\Arquitetura\Academico\Dominio\Aluno\LogaEventoAlunoMatriculado;
 use Alura\Arquitetura\Academico\Dominio\Aluno\RepositorioAluno;
 use Alura\Arquitetura\Academico\Dominio\Indicacao\EnviadorEmailIndicacao;
 use Alura\Arquitetura\Academico\Infra\Aluno\CriptografadorDeSenhaArgon2;
 use Alura\Arquitetura\Academico\Infra\Aluno\RepositorioAlunoPdo;
 use Alura\Arquitetura\Academico\Infra\Indicacao\EnviadorEmailIndicacaoMail;
-use Alura\Arquitetura\Shared\Dominio\Evento\EmitidorEvento;
-use Alura\Arquitetura\Shared\Infra\Evento\LeagueEvent\EmitidorEvento as LeagueEventEmitidorEvento;
-use Alura\Arquitetura\Shared\Infra\Evento\LeagueEvent\Evento as LeagueEventEvento;
+use Alura\Arquitetura\Shared\Dominio\Evento\EventoDominio;
+use Alura\Arquitetura\Shared\Dominio\Evento\OuvinteEvento;
+use Alura\Arquitetura\Shared\Dominio\Evento\PublicadorDeEvento;
 use DI\ContainerBuilder;
-use League\Event\Emitter;
 use PDO;
 use Psr\Container\ContainerInterface;
 use function DI\autowire;
@@ -33,7 +33,7 @@ final class ContainerCreator
     {
         return [
             RepositorioAluno::class => autowire(RepositorioAlunoPdo::class),
-            EmitidorEvento::class => autowire(LeagueEventEmitidorEvento::class),
+            PublicadorDeEvento::class => factory(fn () => self::mapeamentoEventos()),
             CriptografadorDeSenha::class => autowire(CriptografadorDeSenhaArgon2::class),
             EnviadorEmailIndicacao::class => autowire(EnviadorEmailIndicacaoMail::class),
             PDO::class => factory(function () {
@@ -47,26 +47,15 @@ final class ContainerCreator
 
                 return $pdo;
             }),
-            Emitter::class => factory(fn () => self::mapeamentoEventos())
         ];
     }
 
-    private static function mapeamentoEventos(): Emitter
+    private static function mapeamentoEventos(): PublicadorDeEvento
     {
-        $emitter = new Emitter();
+        $publicador = new PublicadorDeEvento();
 
-        $emitter->addListener(AlunoMatriculado::class, function (LeagueEventEvento $leagueEventEvento) {
-            /** @var AlunoMatriculado $eventoDominio */
-            $eventoDominio = $leagueEventEvento->eventoDominio();
+        $publicador->adicionaOuvinte(new LogaEventoAlunoMatriculado());
 
-            fprintf(
-                STDERR,
-                "Aluno com CPF %s foi matriculado em %s\n",
-                $eventoDominio->cpfAluno(),
-                $eventoDominio->momento()->format('d/m/Y')
-            );
-        });
-
-        return $emitter;
+        return $publicador;
     }
 }
