@@ -1,6 +1,6 @@
 <?php
 
-namespace Alura\Arquitetura\Tests\Academico;
+namespace Alura\Arquitetura\Tests\Academico\Integration\Aplicacao\Aluno;
 
 use Alura\Arquitetura\Academico\Aplicacao\Aluno\AdicionarTelefoneAoAluno\AdicionaTelefoneAoAluno;
 use Alura\Arquitetura\Academico\Aplicacao\Aluno\AdicionarTelefoneAoAluno\AdicionaTelefoneAoAlunoDto;
